@@ -1,0 +1,46 @@
+.card {
+  width: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bottomSection {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chip {
+  background-color: var(--color-white) !important;
+  font-size: 10px !important;
+  height: 22px !important;
+  align-self: flex-start;
+}
+
+.title {
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
