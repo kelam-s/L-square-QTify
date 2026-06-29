@@ -10,12 +10,15 @@ function Section({ title, apiUrl, chipLabel = "Follows", showToggle = true }) {
   const [isCollapsed, setIsCollapsed] = useState(true); // ← default TRUE (carousel)
 
   useEffect(() => {
-    axios
-      .get(apiUrl)
-      .then((response) => setAlbums(response.data))
-      .catch((error) => console.error("Error fetching albums:", error))
-      .finally(() => setLoading(false));
-  }, [apiUrl]);
+  axios
+    .get(apiUrl)
+    .then((response) => setAlbums(response.data))
+    .catch((error) => {
+      console.error("Error fetching albums:", error);
+      setAlbums([]); 
+    })
+    .finally(() => setLoading(false));
+}, [apiUrl]);
 
   const toggleCollapse = () => setIsCollapsed((prev) => !prev);
 

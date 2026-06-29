@@ -13,11 +13,25 @@ function SongsSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("https://qtify-backend-labs.crio.do/genres").then((res) => {
-      // API returns { data: [...] } or just an array — handle both
+  axios.get("https://qtify-backend-labs.crio.do/genres")
+    .then((res) => {
       const genreList = res.data.data || res.data;
       setGenres([{ key: "all", label: "All" }, ...genreList]);
+    })
+    .catch((err) => {
+      console.error(err);
+      setGenres([{ key: "all", label: "All" }]); // ← fallback
     });
+
+  axios
+    .get("https://qtify-backend-labs.crio.do/songs")
+    .then((res) => setSongs(res.data))
+    .catch((err) => {
+      console.error(err);
+      setSongs([]); // ← fallback
+    })
+    .finally(() => setLoading(false));
+}, []); 
 
     axios
       .get("https://qtify-backend-labs.crio.do/songs")
