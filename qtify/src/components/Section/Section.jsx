@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../Card/Card";
+import Carousel from "../Carousel/Carousel";
 import styles from "./Section.module.css";
 
-function Section({ title, apiUrl }) {
+function Section({ title, apiUrl, chipLabel = "Follows" }) {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     axios
@@ -15,14 +17,30 @@ function Section({ title, apiUrl }) {
       .finally(() => setLoading(false));
   }, [apiUrl]);
 
+  const toggleCollapse = () => setIsCollapsed((prev) => !prev);
+
   return (
     <div className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        <button className={styles.collapseButton}>Collapse</button>
+        <button className={styles.collapseButton} onClick={toggleCollapse}>
+          {isCollapsed ? "Show All" : "Collapse"}
+        </button>
       </div>
       {loading ? (
         <p className={styles.loadingText}>Loading...</p>
+      ) : isCollapsed ? (
+        <Carousel
+          items={albums}
+          renderItem={(album) => (
+            <Card
+              image={album.image}
+              followCount={album.follows}
+              title={album.title}
+              chipLabel={chipLabel}
+            />
+          )}
+        />
       ) : (
         <div className={styles.grid}>
           {albums.map((album) => (
@@ -31,6 +49,7 @@ function Section({ title, apiUrl }) {
               image={album.image}
               followCount={album.follows}
               title={album.title}
+              chipLabel={chipLabel}
             />
           ))}
         </div>

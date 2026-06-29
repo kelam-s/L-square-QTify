@@ -1,0 +1,28 @@
+.carouselContainer {
+  position: relative;
+}
+
+.navButton {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.prevButton {
+  left: -16px;
+}
+
+.nextButton {
+  right: -16px;
+}
+
+:global(.swiper-button-disabled) {
+  display: none;
+}
+
+:global(.swiper-button-next)::after,
+:global(.swiper-button-prev)::after {
+  content: '' !important;
+}
