@@ -1,0 +1,22 @@
+.section {
+  background-color: var(--color-black);
+  padding: 24px 60px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.title {
+  color: var(--color-white);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.loadingText {
+  color: var(--color-white);
+}

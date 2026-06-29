@@ -4,10 +4,10 @@ import Card from "../Card/Card";
 import Carousel from "../Carousel/Carousel";
 import styles from "./Section.module.css";
 
-function Section({ title, apiUrl, chipLabel = "Follows" }) {
+function Section({ title, apiUrl, chipLabel = "Follows", showToggle = true }) {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true); // ← default TRUE (carousel)
 
   useEffect(() => {
     axios
@@ -23,9 +23,11 @@ function Section({ title, apiUrl, chipLabel = "Follows" }) {
     <div className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        <button className={styles.collapseButton} onClick={toggleCollapse}>
-          {isCollapsed ? "Show All" : "Collapse"}
-        </button>
+        {showToggle && (
+          <button className={styles.collapseButton} onClick={toggleCollapse}>
+            {isCollapsed ? "Show All" : "Collapse"}  {/* ← "Show All" when carousel shown */}
+          </button>
+        )}
       </div>
       {loading ? (
         <p className={styles.loadingText}>Loading...</p>
